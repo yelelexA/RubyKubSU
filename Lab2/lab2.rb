@@ -7,7 +7,7 @@ class Department
         @duties_index_now=0
     end
 
-    def ?duties_empty()
+    def duties_empty?()
       @duties.size==0
 
     def transToString
@@ -15,7 +15,7 @@ class Department
     end
 
     def duties_add(dutie)
-      @duties.push(dutie).uniq()!
+      @duties.push(dutie).uniq!()
     end
     def duties_read()
       sum=","
@@ -29,16 +29,17 @@ class Department
       return sum
     end
     def duties_cursor(dutie)
-      @duties_index_now = @duties.find_index(dutie) if @duties.find_index(dutie)!= null
+      @duties_index_now = @duties.find_index(dutie) if @duties.find_index(dutie)!= nil
     end
     def duties_cursor_read()
-      return @duties[duties_index_now] if  !(self.?duties_empty)
+      return @duties[duties_index_now].transToString if  !(self.duties_empty?)
     end
     def duties_cursor_update(dutie)
-      @duties[@duties_index_now]=dutie if !dutie in @duties &&  !(self.?duties_empty)
+      @duties[@duties_index_now]=dutie if !((@duties.include?(dutie)) & (self.duties_empty?))
     end
     def duties_cursor_delete()
-      @duties.delete_at(@duties_index_now) if !(self.?duties_empty)
+        @duties.delete_at(@duties_index_now) if !(self.duties_empty?) 
+        @duties_index_now=0
     end
 end
 
@@ -47,4 +48,9 @@ puts(a)
 a.duties_add("a")
 a.duties_add("b")
 a.duties_add("c")
+puts(a.duties_read)
+a.duties_cursor("z")
+a.duties_cursor_update("x")
+puts(a.duties_read)
+a.duties_cursor_delete
 puts(a.duties_read)
