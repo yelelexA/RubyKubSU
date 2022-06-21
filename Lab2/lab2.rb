@@ -7,6 +7,10 @@ class Department
         @duties_index_now=0
     end
 
+    def number=(val)
+        @number=val if Department.number?
+    end
+
     def duties_empty?()
       @duties.size==0
 
@@ -17,6 +21,7 @@ class Department
     def duties_add(dutie)
       @duties.push(dutie).uniq!()
     end
+
     def duties_read()
       sum=","
       @duties.each_with_index do |x,ind| 
@@ -28,22 +33,31 @@ class Department
       end
       return sum
     end
+
     def duties_cursor(dutie)
       @duties_index_now = @duties.find_index(dutie) if @duties.find_index(dutie)!= nil
     end
+
     def duties_cursor_read()
       return @duties[duties_index_now].transToString if  !(self.duties_empty?)
     end
+
     def duties_cursor_update(dutie)
       @duties[@duties_index_now]=dutie if !((@duties.include?(dutie)) & (self.duties_empty?))
     end
+
     def duties_cursor_delete()
         @duties.delete_at(@duties_index_now) if !(self.duties_empty?) 
         @duties_index_now=0
     end
+
+    def Department.number?(number)
+        return /\+[0-9]{11}/.match?(number)
+    end
 end
 
-a=Department.new("1","2")
+phoneNumber="+79181234567"
+a=Department.new("w",number)
 puts(a)
 a.duties_add("a")
 a.duties_add("b")
