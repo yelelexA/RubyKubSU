@@ -1,0 +1,19 @@
+---
+- name: A
+  number: "+89181311793"
+  duties:
+  - работать
+  - не работать
+  posts:
+  - department: отдел продаж
+    name: продажник
+    salary: 2001
+    isfree: true
+  - department: отдел закупок
+    name: закупщик
+    salary: 5000
+    isfree: true
+  - department: клеар
+    name: уборщик
+    salary: 10000
+    isfree: false
